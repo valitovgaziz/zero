@@ -52,5 +52,6 @@ func editNews(c *fiber.Ctx) error {
 	if err := c.BodyParser(editNews); err != nil {
 		log.Fatal("Can't parce from body news for edit", err)
 	}
+	DB.Save(editNews)
 	return c.SendString("Edited")
 }
