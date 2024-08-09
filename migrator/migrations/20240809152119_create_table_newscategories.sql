@@ -1,8 +1,9 @@
 -- +goose Up
 -- +goose StatementBegin
 CREATE TABLE IF NOT EXISTS NewsCategories (
-    categoryId BIGINT NOT NULL PRIMARY KEY,
-    newsId BIGINT NOT NULL REFERENCES News(Id)
+    categoryId BIGINT NOT NULL,
+    newsId BIGINT NOT NULL REFERENCES News(Id),
+    PRIMARY KEY (categoryId, newsId)
 );
 -- +goose StatementEnd
 
