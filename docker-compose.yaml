@@ -1,27 +1,38 @@
 services:
-
   db:
     image: postgres:16
     env_file:
-      - allConfig.env
+      - .env
     ports:
       - "${DB_PORT}:${DB_PORT}"
     volumes:
-      - postgres-db:/var/lib/postgresql/data
-  
+      - psql_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      
   api:
     build:
       context: ./api
       dockerfile: Dockerfile
     env_file:
-      - allConfig.env
+      - .env
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     volumes:
       - .:/usr/src/app
     depends_on:
       - db
-    command: ./bin/api.exe
 
+  migrator:
+    build: ./migrator
+    env_file:
+      - .env
+    depends_on:
+      - db
+    volumes:
+      - goose:/app
 volumes:
-  postgres_db:
+  psql_db:
+  goose:

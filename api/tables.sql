@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS News (
     content TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Newscategories (
+CREATE TABLE IF NOT EXISTS NewsCategories (
     categoryId BIGINT NOT NULL PRIMARY KEY,
     newsId BIGINT NOT NULL REFERENCES News(Id)
 );
