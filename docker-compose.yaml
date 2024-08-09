@@ -1,0 +1,27 @@
+services:
+
+  db:
+    image: postgres:16
+    env_file:
+      - allConfig.env
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+  
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    env_file:
+      - allConfig.env
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+    command: ./bin/api.exe
+
+volumes:
+  postgres_db:

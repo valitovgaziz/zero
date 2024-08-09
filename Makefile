@@ -1,0 +1,7 @@
+build:
+	@docker compose build
+
+run: build
+	@docker compose up
+
+.DEFAULT_GOAL=run
