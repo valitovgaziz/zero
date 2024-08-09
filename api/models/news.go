@@ -1,9 +1,11 @@
 package models
 
-//reform:news
+//go:generate reform
+
+//reform:people
 type News struct {
-	id         int64  `reform:"id,pk"`
-	title      string `reform:"title"`
-	content    string `reform:"content"`
-	categories []int  `reform:"categories"`
+	Id         int64  `reform:"id,pk"`
+	Title      string `reform:"title"`
+	Content    string `reform:"content"`
+	Categories []int  `reform:"categories"`
 }

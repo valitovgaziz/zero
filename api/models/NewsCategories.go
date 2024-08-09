@@ -1,6 +1,9 @@
 package models
 
+//go:generate reform
+
+//reform:newscategories
 type NewsCategories struct {
-	idNews       int64 `reform:"id"`
-	idCategories int64 `reform:""`
+	IdNews       int64 `reform:"id"`
+	IdCategories int64 `reform:""`
 }
