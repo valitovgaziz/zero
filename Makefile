@@ -1,7 +1,10 @@
 build:
 	@docker compose build
 
-run: build
-	@docker compose up
+run:
+	@docker compose up --build
+
+clean:
+	@docker container prune
 
 .DEFAULT_GOAL=run

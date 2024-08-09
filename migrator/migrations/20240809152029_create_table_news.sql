@@ -1,5 +1,5 @@
 -- +goose Up
--- +goose StatementBeginCREATE TABLE IF NOT EXISTS News (CREATE TABLE IF NOT EXISTS News (
+-- +goose StatementBegin
 CREATE TABLE IF NOT EXISTS News (
     Id SERIAL PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
