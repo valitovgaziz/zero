@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"zero/models"
 
@@ -44,14 +45,21 @@ func main() {
 }
 
 func getNews(c *fiber.Ctx) error {
-	return c.SendString("Hello, World!")
+	newses, err := DB.FindAllFrom(models.NewsTable, "id")
+	if err != nil {
+		return c.JSON(http.StatusNotFound)
+	}
+	return c.JSON(newses)
 }
 
 func editNews(c *fiber.Ctx) error {
 	editNews := new(models.News)
 	if err := c.BodyParser(editNews); err != nil {
-		log.Fatal("Can't parce from body news for edit", err)
+		log.Fatal("Can't parce news from body for edit", err)
 	}
-	DB.Save(editNews)
-	return c.SendString("Edited")
+	err := DB.Save(editNews)
+	if err != nil {
+		return c.JSON(http.StatusNotModified)
+	}
+	return c.JSON(http.StatusOK, )
 }
